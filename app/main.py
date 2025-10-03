@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 
 
 class Validator(ABC):
+
     def __set_name__(self, owner: type, name: str) -> None:
         self.protected_name = "_" + name
 
@@ -16,7 +17,9 @@ class Validator(ABC):
     def validate(self, value: object) -> None:
         pass
 
+
 class Number(Validator):
+
     def __init__(
             self,
             min_value: int,
@@ -37,7 +40,9 @@ class Number(Validator):
                 f"and greater than {self.max_value}"
             )
 
+
 class OneOf(Validator):
+
     def __init__(self, *options: str) -> None:
         self.options = options
 
