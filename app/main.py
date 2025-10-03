@@ -13,11 +13,15 @@ class Validator(ABC):
         setattr(instance, self.protected_name, value)
 
     @abstractmethod
-    def validate(self, value):
+    def validate(self, value: object) -> None:
         pass
 
 class Number(Validator):
-    def __init__(self, min_value, max_value) -> None:
+    def __init__(
+            self,
+            min_value: int,
+            max_value: int
+    ) -> None:
         self.min_value = min_value
         self.max_value = max_value
 
@@ -37,7 +41,7 @@ class OneOf(Validator):
     def __init__(self, *options: str) -> None:
         self.options = options
 
-    def validate(self, value: str):
+    def validate(self, value: str) -> None:
         if value not in self.options:
             raise ValueError(
                 f"Expected {value} to be one of {self.options}."
